@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/07 19:51:13 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/13 15:43:37 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@
 # include <readline/readline.h>
 
 # include "../libft/libft.h"
+
+typedef struct s_command
+{
+	char	*cmd;
+	char	*opt;
+	char	*args;
+}			t_command;
 
 #endif
