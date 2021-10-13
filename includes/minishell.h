@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/13 15:43:37 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/13 18:30:31 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@
 
 typedef struct s_command
 {
-	char	*cmd;
-	char	*opt;
-	char	*args;
-}			t_command;
+	char				*cmd;
+	char				*opt;
+	char				*args;
+	struct s_command	*next;
+}						t_command;
 
 #endif
