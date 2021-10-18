@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/13 18:30:31 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/18 19:53:12 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,21 @@
 
 # include "../libft/libft.h"
 
-typedef struct s_command
+# define TRUE 1
+# define FALSE 0
+
+# define NO_QUOTE 0
+# define SINGLE_QUOTE 1
+# define DOUBLE_QUOTE 2
+
+# define QUOTE "\0\'\""
+
+typedef int		t_bool;
+
+typedef struct s_cmd_list
 {
-	char				*cmd;
-	char				*opt;
-	char				*args;
-	struct s_command	*next;
-}						t_command;
+	char				**cmd;
+	struct s_cmd_list	*next;
+}						t_cmd_list;
 
 #endif
