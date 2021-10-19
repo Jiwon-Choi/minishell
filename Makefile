@@ -6,14 +6,14 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/10/18 20:09:22 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/10/19 12:26:40 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 TARGET		= minishell
 
 CC			= gcc
-# CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -fsanitize=address #-Wall -Werror -Wextra
 RM			= rm -rf
 
 LIBFT_DIR	= ./libft/
@@ -23,7 +23,9 @@ INCS_DIR	= ./includes/
 SRCS_DIR	= ./srcs/
 OBJS_DIR	= ./objs/
 
-SRC			= main.c
+SRC			= lst_utils.c \
+			  main.c \
+			  parse.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

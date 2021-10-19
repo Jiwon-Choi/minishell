@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/18 19:53:12 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 12:29:42 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,22 @@ typedef int		t_bool;
 typedef struct s_cmd_list
 {
 	char				**cmd;
+	char				*in;
+	char				*out;
 	struct s_cmd_list	*next;
-}						t_cmd_list;
+}						t_cmd_lst;
+
+// lst_utils.c
+void		cmd_lst_add_back(t_cmd_lst **lst, t_cmd_lst *new);
+t_cmd_lst	*cmd_lst_new(void);
+char		**cmd_cmd_add_back(char **old_cmd, char *input);
+
+// main.c
+
+// parse.c
+
+char		*parse_unit(char **input);
+t_cmd_lst	*parse_command(char *input);
+t_cmd_lst	*parse(char *input);
 
 #endif
