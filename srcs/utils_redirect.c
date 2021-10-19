@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 17:41:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 17:41:31 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/10/19 17:59:14 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/10/19 18:02:20 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_handler(char *err_msg)
+void	redirect_add_back(t_redirect **lst, t_redirect *new)
 {
-	printf("[Error] %s\n", err_msg);
-	exit(1);
+	t_redirect	*p;
+
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	p = *lst;
+	while (p->next)
+		p = p->next;
+	p->next = new;
 }
 
-int	main(void)
+t_redirect	redirect_new(void)
 {
-	t_cmd_lst	*cmd_lst;
+	t_redirect	*new;
 
-	cmd_lst = split_line("cat -e < file1 | echo <file	-n \'\"abcd    \' > file2");
-	while (cmd_lst)
-	{
-		while (*cmd_lst->cmd)
-			printf("[%s]\n", *(cmd_lst->cmd++));
-		printf("\n");
-		cmd_lst = cmd_lst->next;
-	}
-	return (0);
+	new = (t_redirect *)malloc(sizeof(t_redirect));
+	if (!new)
+		return (0);
+	//type
+	//file
+	new->next = NULL;
+	return (new);
 }

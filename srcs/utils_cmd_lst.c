@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   utils_cmd_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:20:17 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 15:25:11 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/10/19 17:57:32 by jiwchoi           #+#    #+#             */
+/*   Updated: 2021/10/19 18:04:26 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_cmd_lst	*cmd_lst_new(void)
 	return (new);
 }
 
-char	**cmd_cmd_add_back(char **old_cmd, char *input)
+char	**add_cmd(char **old_cmd, char *input)
 {
 	int		size;
 	char	**new;
