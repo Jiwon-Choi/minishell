@@ -6,7 +6,7 @@
 /*   By: jiwchoi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:20:17 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 14:38:08 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 15:25:11 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,10 @@ char	**cmd_cmd_add_back(char **old_cmd, char *input)
 	new = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!new)
 		return ((char **)EXIT_FAILURE);
-	int i = 0;
-	while (old_cmd[i])
-	{
-		new[i] = old_cmd[i];
-		i++;
-	}
-	new[i++] = input;
-	new[i] = NULL;
+	p = new;
+	while (*old_cmd)
+		*p++ = *old_cmd++;
+	*p++ = input;
+	*p = NULL;
 	return (new);
 }

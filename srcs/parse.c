@@ -6,7 +6,7 @@
 /*   By: jiwchoi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:22:30 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 15:15:17 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 15:30:15 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 char	*parse_unit(char **input)
 {
-	int		i;
 	int		quote;
 	char	*start;
-   
+
 	quote = NO_QUOTE;
 	while (ft_isspace(**input))
 		(*input)++;
@@ -26,32 +25,35 @@ char	*parse_unit(char **input)
 	start = *input;
 	while (**input && !ft_isspace(**input))
 	{
-		if (**input == '\"')
+		if (**input == '\"' && (*input)++)
 			quote = DOUBLE_QUOTE;
-		else if (**input == '\'')
+		else if (**input == '\'' && (*input)++)
 			quote = SINGLE_QUOTE;
 		if (quote)
 		{
-			(*input)++;
 			while (**input != QUOTE[quote])
 				(*input)++;
 			quote = NO_QUOTE;
 		}
 		(*input)++;
 	}
-	i = *input - start;	
-	return (ft_substr(start, 0, i));
+	return (ft_substr(start, 0, *input - start));
 }
 
 t_cmd_lst	*parse_command(char *input)
 {
 	t_cmd_lst	*new;
+	char		**new_cmd;
 
 	new = cmd_lst_new();
 	if (!new)
 		return ((t_cmd_lst *)EXIT_FAILURE);
 	while (*input)
-		new->cmd = cmd_cmd_add_back(new->cmd, parse_unit(&input));
+	{
+		new_cmd = cmd_cmd_add_back(new->cmd, parse_unit(&input));
+		free(new->cmd);
+		new->cmd = new_cmd;
+	}
 	return (new);
 }
 
@@ -60,7 +62,7 @@ t_cmd_lst	*parse(char *input)
 	t_cmd_lst	*lst;
 	t_cmd_lst	*new;
 	char		**arr;
-	
+
 	lst = NULL;
 	arr = ft_split(input, '|');
 	while (*arr)

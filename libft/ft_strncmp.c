@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 14:20:42 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/24 15:45:42 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:13:31 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	while (n && *s1 && *s2)
 	{

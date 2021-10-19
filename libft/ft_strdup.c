@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 16:16:01 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/24 15:21:16 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:17:52 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strdup(const char *s)
 	int			i;
 
 	l = ft_strlen(s);
-	if (!(dup = (char *)malloc(l + 1)))
+	dup = (char *)malloc(l + 1);
+	if (!dup)
 		return (0);
 	i = 0;
 	while (s[i])

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:43:38 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/27 21:04:11 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:16:28 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	head = 0;
 	while (p)
 	{
-		if (!(new = ft_lstnew(f(p->content))))
+		new = ft_lstnew(f(p->content));
+		if (!new)
 		{
 			ft_lstclear(&head, del);
 			return (0);

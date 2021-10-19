@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 13:00:10 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/22 17:53:16 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:13:17 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t		i;
 

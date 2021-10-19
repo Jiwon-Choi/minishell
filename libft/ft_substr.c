@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 12:12:20 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/26 14:24:48 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:19:33 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (0);
-	if (!(sub = (char *)malloc(len + 1)))
+	sub = (char *)malloc(len + 1);
+	if (!sub)
 		return (0);
 	if (ft_strlen(s) < start)
 	{

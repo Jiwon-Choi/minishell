@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 15:59:04 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/24 16:50:08 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:20:38 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ char	*ft_strrchr(const char *s, int c)
 			last_c = (char *)s;
 		s++;
 	}
-	return (!c ? (char *)s : last_c);
+	if (!c)
+		return ((char *)s);
+	else
+		return (last_c);
 }

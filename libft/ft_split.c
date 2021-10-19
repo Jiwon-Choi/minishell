@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 23:40:16 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/29 17:32:20 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:17:21 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			ft_word_cnt(char const *s, char c)
+static int	ft_word_cnt(char const *s, char c)
 {
 	int		cnt;
 
@@ -30,7 +30,7 @@ static int			ft_word_cnt(char const *s, char c)
 	return (cnt);
 }
 
-static int			get_sep_word(char **arr, char const *s, char sep)
+static int	get_sep_word(char **arr, char const *s, char sep)
 {
 	int		i;
 	int		len;
@@ -59,7 +59,7 @@ static int			get_sep_word(char **arr, char const *s, char sep)
 	return (0);
 }
 
-char				**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		idx;
@@ -67,7 +67,8 @@ char				**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	if (!(result = (char **)malloc(sizeof(char *) * (ft_word_cnt(s, c) + 1))))
+	result = (char **)malloc(sizeof(char *) * (ft_word_cnt(s, c) + 1));
+	if (!result)
 		return (0);
 	idx = get_sep_word(result, s, c);
 	if (idx)

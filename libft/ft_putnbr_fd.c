@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 18:01:11 by jiwchoi           #+#    #+#             */
-/*   Updated: 2020/12/28 15:55:45 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/19 16:12:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_div(int input, int fd)
 {
-	char ch;
+	char	ch;
 
 	if (input == 0)
 		return ;
@@ -23,9 +23,9 @@ static void	ft_div(int input, int fd)
 	write(fd, &ch, 1);
 }
 
-void		ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char ch;
+	char	ch;
 
 	if (n == 0)
 	{

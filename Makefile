@@ -6,14 +6,14 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/10/19 12:26:40 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/10/19 15:21:59 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 TARGET		= minishell
 
 CC			= gcc
-CFLAGS		= -fsanitize=address #-Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -fsanitize=address
 RM			= rm -rf
 
 LIBFT_DIR	= ./libft/
