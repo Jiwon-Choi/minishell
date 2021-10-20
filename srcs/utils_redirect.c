@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:59:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 12:13:54 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:51:32 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_redirect	*redirect_new(void)
 
 	new = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!new)
-		return (0);
+		return (NULL);
 	//type
 	//file
 	new->next = NULL;

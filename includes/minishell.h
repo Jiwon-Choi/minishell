@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 15:11:34 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:26:31 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ typedef struct s_cmd_lst
 }						t_cmd_lst;
 
 // error.c
-void		*error_return_null(char *err_msg);
+int			error_handler(char *err_msg);
 // main.c
 
 // split.c
-char		*split_quote(char **input);
-t_cmd_lst	*split_command(char *input);
-t_cmd_lst	*split_line(char *input);
+int			split_quote(char **res, char **input);
+int			split_command(t_cmd_lst **new, char *input);
+int			split_line(t_cmd_lst **cmd_lst, char *input);
 
 // utils_cmd_lst.c
 void		cmd_lst_add_back(t_cmd_lst **lst, t_cmd_lst *new);
