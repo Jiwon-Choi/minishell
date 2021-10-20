@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:57:32 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 18:04:26 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 13:35:59 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ t_cmd_lst	*cmd_lst_new(void)
 char	**add_cmd(char **old_cmd, char *input)
 {
 	int		size;
+	int		i;
 	char	**new;
-	char	**p;
 
 	size = 0;
 	while (old_cmd[size])
@@ -59,10 +59,14 @@ char	**add_cmd(char **old_cmd, char *input)
 	new = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!new)
 		return ((char **)EXIT_FAILURE);
-	p = new;
-	while (*old_cmd)
-		*p++ = *old_cmd++;
-	*p++ = input;
-	*p = NULL;
+	i = 0;
+	while (old_cmd[i])
+	{
+		new[i] = old_cmd[i];
+		i++;
+	}
+	new[i++] = input;
+	new[i] = NULL;
+	free(old_cmd);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:59:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 18:02:20 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 12:13:54 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	redirect_add_back(t_redirect **lst, t_redirect *new)
 	p->next = new;
 }
 
-t_redirect	redirect_new(void)
+t_redirect	*redirect_new(void)
 {
 	t_redirect	*new;
 

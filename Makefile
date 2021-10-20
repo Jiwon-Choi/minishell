@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/10/19 17:58:19 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/10/20 13:48:26 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ INCS_DIR	= ./includes/
 SRCS_DIR	= ./srcs/
 OBJS_DIR	= ./objs/
 
-SRC			= main.c \
+SRC			= error.c \
+			  main.c \
 			  split.c \
-			  utils_cmd_lst.c
+			  utils_cmd_lst.c \
+			  utils_redirect.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

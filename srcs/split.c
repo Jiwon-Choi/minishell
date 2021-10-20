@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:43:17 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/19 18:04:56 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:11:48 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*split_quote(char **input)
 	while (ft_isspace(**input))
 		(*input)++;
 	if (!**input)
-		return (0);
+		return (NULL);
 	start = *input;
 	while (**input && !ft_isspace(**input))
 	{
@@ -34,7 +34,7 @@ char	*split_quote(char **input)
 			while (**input != QUOTE[quote])
 			{
 				if (!**input)
-					error_handler("quote");
+					return (error_return_null("unclosed quote"));
 				(*input)++;
 			}
 			quote = NONE;
@@ -47,16 +47,15 @@ char	*split_quote(char **input)
 t_cmd_lst	*split_command(char *input)
 {
 	t_cmd_lst	*new;
-	char		**new_cmd;
+	char		*split_res;
 
 	new = cmd_lst_new();
 	if (!new)
-		return ((t_cmd_lst *)EXIT_FAILURE);
+		return (NULL);
 	while (*input)
 	{
-		new_cmd = add_cmd(new->cmd, split_quote(&input));
-		free(new->cmd);
-		new->cmd = new_cmd;
+		split_res = split_quote(&input);
+		new->cmd = add_cmd(new->cmd, split_res);
 	}
 	return (new);
 }
@@ -66,14 +65,16 @@ t_cmd_lst	*split_line(char *input)
 	t_cmd_lst	*lst;
 	t_cmd_lst	*new;
 	char		**arr;
+	int			i;
 
 	lst = NULL;
 	arr = ft_split(input, '|');
-	while (*arr)
+	i = 0;
+	while (arr[i])
 	{
-		new = split_command(*arr);
+		new = split_command(arr[i++]);
 		cmd_lst_add_back(&lst, new);
-		arr++;
 	}
+	free(arr);
 	return (lst);
 }
