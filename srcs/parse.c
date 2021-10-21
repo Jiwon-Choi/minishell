@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:39:44 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/21 20:44:04 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/21 21:05:45 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 int	parse_redirect(t_cmd_lst *lst, int del)
 {
+	t_redirect	**redirect_lst;
 	t_redirect	*new;
 	int			i;
 
+	redirect_lst = NULL;
 	new = redirect_new();
+	if (*lst->cmd[del] == '<')
+		redirect_lst = &(lst->in);
+	else if (*lst->cmd[del] == '>')
+		redirect_lst = &(lst->out);
 	if (ft_strncmp(lst->cmd[del], "<<", 2) == 0)
 		new->type = DOUBLE;
 	else if (*lst->cmd[del] == '<')
@@ -31,8 +37,11 @@ int	parse_redirect(t_cmd_lst *lst, int del)
 		i++;
 	new->file = ft_substr(&(lst->cmd[del][i]), 0,
 			ft_strlen(&(lst->cmd[del][i])));
-	printf("!!!! (%s), (%s)\n", lst->cmd[del], new->file);
+	redirect_add_back(redirect_lst, new);
+//	printf("!!!! (%s), (%s)\n", lst->cmd[del], new->file);
 	lst->cmd = del_cmd(lst->cmd, del);
+	printf("--- %d %s ---\n", lst->in->type, lst->in->file);
+//	printf("--- %d %s ---\n", lst->out->type, lst->out->file);
 	return (EXIT_SUCCESS);
 }
 
