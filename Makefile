@@ -6,14 +6,15 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/10/20 13:48:26 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/10/21 20:41:56 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 TARGET		= minishell
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra #-fsanitize=address -g
+#CFLAGS		= -fsanitize=address -g
 RM			= rm -rf
 
 LIBFT_DIR	= ./libft/
@@ -25,6 +26,7 @@ OBJS_DIR	= ./objs/
 
 SRC			= error.c \
 			  main.c \
+			  parse.c \
 			  split.c \
 			  utils_cmd_lst.c \
 			  utils_redirect.c

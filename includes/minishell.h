@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 15:26:31 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/21 20:46:34 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,24 @@ typedef struct s_redirect
 typedef struct s_cmd_lst
 {
 	char				**cmd;
-	struct s_direct		*in;
-	struct s_direct		*out;
+	struct s_redirect	*in;
+	struct s_redirect	*out;
 	struct s_cmd_lst	*next;
 }						t_cmd_lst;
 
 // error.c
 int			error_handler(char *err_msg);
+
 // main.c
 
+// parse.c
+int			parse_redirect(t_cmd_lst *lst, int del);
+int			parse(t_cmd_lst *lst);
+
 // split.c
-int			split_quote(char **res, char **input);
+int			split_quotes(char **input);
+int			split_redirect(char **input);
+int			split_space(char **res, char **input);
 int			split_command(t_cmd_lst **new, char *input);
 int			split_line(t_cmd_lst **cmd_lst, char *input);
 
@@ -65,6 +72,7 @@ int			split_line(t_cmd_lst **cmd_lst, char *input);
 void		cmd_lst_add_back(t_cmd_lst **lst, t_cmd_lst *new);
 t_cmd_lst	*cmd_lst_new(void);
 char		**add_cmd(char **old_cmd, char *input);
+char		**del_cmd(char **old_cmd, int del);
 
 // utils_redirect.c
 void		redirect_add_back(t_redirect **lst, t_redirect *new);

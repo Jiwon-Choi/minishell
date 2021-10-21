@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:57:32 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 15:51:17 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/21 17:36:01 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,32 @@ char	**add_cmd(char **old_cmd, char *input)
 	new[i++] = input;
 	new[i] = NULL;
 	free(old_cmd);
+	return (new);
+}
+
+char	**del_cmd(char **old_cmd, int del)
+{
+	int		size;
+	int		i;
+	char	**new;
+
+	size = 0;
+	while (old_cmd[size])
+		size++;
+	new = (char **)malloc(sizeof(char *) * size);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < del)
+	{
+		new[i] = old_cmd[i];
+		i++;
+	}
+	while (old_cmd[i + 1])
+	{
+		new[i] = old_cmd[i + 1];
+		i++;
+	}
+	new[i] = NULL;
 	return (new);
 }

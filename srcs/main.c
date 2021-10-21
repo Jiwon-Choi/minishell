@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:41:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 15:58:07 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/21 20:42:57 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int	main(void)
 
 	cmd_lst = NULL;
 
-	char	*str = "cat -e < file1 | echo <file	-n \'\"\'abcd     > file2";
-//	char	*str = "cat -e < file1 | echo <file	-n \'\"abcd     > file2";
+//	char	*str = "cat -e<< file1 <file2 >               file3    >> file4\'abcd\' | echo <file	-n \"\'abcd   $USER      \" > file2";
+	char	*str = "echo <file	-n 123\"\'abcd $USER \"\"abc\" >> file2";
 
 	if (split_line(&cmd_lst, str))
-		return (1);
+		return (EXIT_FAILURE);
+	if (parse(cmd_lst))
+		return (EXIT_FAILURE);
 	while (cmd_lst)
 	{
 		while (*cmd_lst->cmd)
-			printf("[%s]\n", *(cmd_lst->cmd++));
+			printf("[%s]\n", *cmd_lst->cmd++);
 		printf("\n");
 		cmd_lst = cmd_lst->next;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
