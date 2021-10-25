@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/21 20:46:34 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/25 16:43:23 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			error_handler(char *err_msg);
 
 // parse.c
 int			parse_redirect(t_cmd_lst *lst, int del);
-int			parse(t_cmd_lst *lst);
+int			parse(t_cmd_lst *lst, char **envp);
 
 // split.c
 int			split_quotes(char **input);
@@ -71,6 +71,7 @@ int			split_line(t_cmd_lst **cmd_lst, char *input);
 // utils_cmd_lst.c
 void		cmd_lst_add_back(t_cmd_lst **lst, t_cmd_lst *new);
 t_cmd_lst	*cmd_lst_new(void);
+void		cmd_strtrim(char **old_cmd);
 char		**add_cmd(char **old_cmd, char *input);
 char		**del_cmd(char **old_cmd, int del);
 

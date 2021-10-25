@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:57:32 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/21 17:36:01 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/25 16:42:36 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ t_cmd_lst	*cmd_lst_new(void)
 	new->out = NULL;
 	new->next = NULL;
 	return (new);
+}
+
+void	cmd_strtrim(char **old_cmd)
+{
+	int		i;
+	char	*new;
+
+	i = 0;
+	while (old_cmd[i])
+	{
+		new = ft_strtrim(old_cmd[i], " ");
+		free(old_cmd[i]);
+		old_cmd[i] = new;
+		i++;
+	}
 }
 
 char	**add_cmd(char **old_cmd, char *input)

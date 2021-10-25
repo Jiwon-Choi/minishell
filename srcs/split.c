@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:43:17 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/21 20:45:44 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/25 16:57:32 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	split_command(t_cmd_lst **new, char *input)
 {
 	char	*split_res;
 
+	if (!*input)
+		return (error_handler("syntax error near unexpected token \'|\'"));
 	*new = cmd_lst_new();
 	if (!*new)
 		return (error_handler("malloc failed in cmd_lst_new()"));
@@ -105,10 +107,18 @@ int	split_line(t_cmd_lst **cmd_lst, char *input)
 {
 	t_cmd_lst	*new;
 	char		**cmd_arr;
+	char		*trim_input;
 	int			i;
 
 	new = NULL;
+	trim_input = ft_strtrim(input, " ");
+	i = 0;
+	while (trim_input[i])
+		i++;
+	if (trim_input[0] == '|' || trim_input[--i] == '|')
+		return (error_handler("syntax error near unexpected token \'|\'"));
 	cmd_arr = ft_split(input, '|');
+	cmd_strtrim(cmd_arr);
 	i = 0;
 	while (cmd_arr[i])
 	{
@@ -117,5 +127,6 @@ int	split_line(t_cmd_lst **cmd_lst, char *input)
 		cmd_lst_add_back(cmd_lst, new);
 	}
 	free(cmd_arr);
+	free(trim_input);
 	return (EXIT_SUCCESS);
 }
