@@ -6,26 +6,26 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:41:14 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/25 16:58:12 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/25 19:00:09 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
+//	char *str = "ls>out\"hi\" -l<in | wc";
+	char *str = "<";
+
 	t_cmd_lst	*cmd_lst;
 
+	(void)argc;
+	(void)argv;
 	cmd_lst = NULL;
-
-//	char	*str = "cat -e<< file1 <file2 >               file3    >> file4\'abcd\' | echo <file	-n \"\'abcd   $USER      \" > file2";
-//	char	*str = "echo <file1 123\"abc\" >> file2 | cat -e | ";
-	char *str = "ls  | wc";
-
 	if (split_line(&cmd_lst, str))
 		return (EXIT_FAILURE);
-//	if (parse(cmd_lst, envp))
-//		return (EXIT_FAILURE);
+	if (parse(cmd_lst, envp))
+		return (EXIT_FAILURE);
 
 	while (cmd_lst)
 	{
