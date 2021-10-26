@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/26 15:44:47 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/26 16:55:09 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	split_command(char **res, char **input)
 {
 	char	*start;
 
-	if (**input == ' ')
+	while (ft_isspace(**input))
 		(*input)++;
 	start = *input;
 	if (**input == '<' || **input == '>')
@@ -86,6 +86,8 @@ int	split_line(char **res, char **input)
 
 	if (**input == '|')
 		(*input)++;
+	while (ft_isspace(**input))
+		(*input)++;
 	start = *input;
 	while (**input && **input != '|')
 	{
@@ -98,7 +100,7 @@ int	split_line(char **res, char **input)
 	return (EXIT_SUCCESS);
 }
 
-int	parse_command(char *line)
+int	parse_command(t_cmd **new, char *line)
 {
 	char	*res;
 
@@ -107,30 +109,44 @@ int	parse_command(char *line)
 		if (split_command(&res, &line))
 			return (EXIT_FAILURE);
 		if (*res)
+		{
+			(*new)->argv = cmd_argv_add_back((*new)->argv, res);
 			printf("-[%s]\n", res);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
 
 int	parse_line(t_cmd **cmd, char *line)
 {
+	t_cmd	*new;
 	char	*res;
 
-	(void)cmd;
+	if (*line == '|')
+		return (error_handler("syntax error near unexpected token \'|\'"));
 	while (*line)
 	{
 		if (split_line(&res, &line))
 			return (EXIT_FAILURE);
+		if (!*res)
+			return (error_handler("syntax error near unexpected token \'|\'"));
+		new = cmd_new();
+		if (!new)
+			return (error_handler("malloc error in cmd_new()"));
 		printf("[%s]\n", res);
-		parse_command(res);
+		if (parse_command(&new, res))
+			return (EXIT_FAILURE);
 		printf("\n");
+		cmd_add_back(cmd, new);
+		free(res);
 	}
 	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line = "echo>out -n< in \'$USER |=\'$USER ~|    cat    -e    | grep -r";
+	char	*line = "  echo>out    -n< in \'$USER |=\'$USER ~    | grep   -r  ";
+//	char	*line = "| a | b";
 
 	t_cmd	*cmd;
 
@@ -138,7 +154,20 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 	cmd = NULL;
+	printf("%s\n", line);
 	if (parse_line(&cmd, line))
 		return (EXIT_FAILURE);
+	printf("--------------------\n\n");
+	//free(cmd);
+
+	int i = 1;
+	while (cmd)
+	{
+		printf("%d\n", i++);
+		while (*cmd->argv)
+			printf("[%s]\n", *cmd->argv++);
+		printf("\n");
+		cmd = cmd->next;
+	}
 	return (EXIT_SUCCESS);
 }
