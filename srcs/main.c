@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/26 16:55:09 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/28 12:09:43 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,33 @@ int	split_command(char **res, char **input)
 	return (EXIT_SUCCESS);
 }
 
+int	parse_command(t_cmd **new, char *line)
+{
+	char	*res;
+
+	while (*line)
+	{
+		if (split_command(&res, &line))
+			return (EXIT_FAILURE);
+		if (*res == '<')
+		{
+			redir_add_back(&((*new)->in), redir_new(res));
+			printf("-[%s]\n", res);
+		}
+		else if (*res == '>')
+		{
+			redir_add_back(&((*new)->out), redir_new(res));
+			printf("-[%s]\n", res);
+		}
+		else if (*res)
+		{
+			(*new)->argv = cmd_argv_add_back((*new)->argv, res);
+			printf("-[%s]\n", res);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	split_line(char **res, char **input)
 {
 	char	*start;
@@ -97,23 +124,6 @@ int	split_line(char **res, char **input)
 		(*input)++;
 	}
 	*res = ft_substr(start, 0, *input - start);
-	return (EXIT_SUCCESS);
-}
-
-int	parse_command(t_cmd **new, char *line)
-{
-	char	*res;
-
-	while (*line)
-	{
-		if (split_command(&res, &line))
-			return (EXIT_FAILURE);
-		if (*res)
-		{
-			(*new)->argv = cmd_argv_add_back((*new)->argv, res);
-			printf("-[%s]\n", res);
-		}
-	}
 	return (EXIT_SUCCESS);
 }
 
@@ -145,8 +155,7 @@ int	parse_line(t_cmd **cmd, char *line)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line = "  echo>out    -n< in \'$USER |=\'$USER ~    | grep   -r  ";
-//	char	*line = "| a | b";
+	char	*line = "  echo>>out    -n<   in \'$USER |=\'$USER ~    | grep   -r  ";
 
 	t_cmd	*cmd;
 
@@ -166,6 +175,18 @@ int	main(int argc, char **argv, char **envp)
 		printf("%d\n", i++);
 		while (*cmd->argv)
 			printf("[%s]\n", *cmd->argv++);
+		printf("in\n");
+		while (cmd->in)
+		{
+			printf("[%d %s]\n", cmd->in->type, cmd->in->file);
+			cmd->in = cmd->in->next;
+		}
+		printf("out\n");
+		while (cmd->out)
+		{
+			printf("[%d %s]\n", cmd->out->type, cmd->out->file);
+			cmd->out = cmd->out->next;
+		}
 		printf("\n");
 		cmd = cmd->next;
 	}
