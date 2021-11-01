@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:10:00 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 11:50:50 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/28 14:24:25 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,26 @@ t_redirect	*redir_new(char *line)
 	new = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!new)
 		return (NULL);
-	if (ft_strncmp(line, "<<", 2) == 0
-			|| ft_strncmp(line, ">>", 2) == 0)
-		new->type = DOUBLE;
-	else
-		new->type = SINGLE;
-	line += new->type;
+	if (ft_strncmp(line, "<<", 2) == 0)
+	{
+		new->type = REDIRECT_INPUT_DOUBLE;
+		line += 2;
+	}
+	else if (ft_strncmp(line, ">>", 2) == 0)
+	{
+		new->type = REDIRECT_OUTPUT_DOUBLE;
+		line += 2;
+	}
+	else if (*line == '<')
+	{
+		new->type = REDIRECT_INPUT_SINGLE;
+		line++;
+	}
+	else if (*line == '>')
+	{
+		new->type = REDIRECT_OUTPUT_DOUBLE;
+		line++;
+	}
 	while (ft_isspace(*line))
 		line++;
 	new->file = ft_substr(line, 0, ft_strlen(line));

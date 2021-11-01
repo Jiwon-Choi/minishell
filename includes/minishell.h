@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 11:44:17 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/28 14:26:11 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define SINGLE 1
 # define DOUBLE 2
 
+# define REDIRECT_INPUT_SINGLE 1
+# define REDIRECT_INPUT_DOUBLE 2
+# define REDIRECT_OUTPUT_SINGLE 3
+# define REDIRECT_OUTPUT_DOUBLE 4
+
 # define QUOTE "\0\'\""
 
 typedef int		t_bool;
@@ -47,13 +52,22 @@ typedef struct s_redirect
 typedef struct s_cmd
 {
 	char				**argv;
-	struct s_redirect	*in;
-	struct s_redirect	*out;
+	struct s_redirect	*redirect;
 	struct s_cmd		*next;
 }						t_cmd;
 
 // error.c
 int			error_handler(char *err_msg);
+
+// parse_command.c
+int			split_redirect(char **input);
+int			split_command(char **res, char **input);
+int			parse_command(t_cmd **new, char *line);
+
+// parse_line.c
+int			pass_quotes(char **input);
+int			split_line(char **res, char **input);
+int			parse_line(t_cmd **cmd, char *line);
 
 // utils_cmd.c
 t_cmd		*cmd_new(void);

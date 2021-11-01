@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:12:22 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 11:44:38 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/10/28 14:26:45 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_cmd	*cmd_new(void)
 	if (!new->argv)
 		return (NULL);
 	new->argv[0] = NULL;
-	new->in = NULL;
-	new->out = NULL;
+	new->redirect= NULL;
 	new->next = NULL;
 	return (new);
 }
