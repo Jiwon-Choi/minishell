@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 14:33:22 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/01 18:39:27 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line = "  ec\"ho\">>out    -n<   in \'$USER |=\'$USER ~    | grep   -r  ";
+	char	*line = "  ec\"ho\">>out -n< in \'$USER \'$ USER | grep -r ";
 
 	t_cmd	*cmd;
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	cmd = NULL;
 	printf("%s\n", line);
-	if (parse_line(&cmd, line))
+	if (parse_line(&cmd, line, envp))
 		return (EXIT_FAILURE);
 	printf("--------------------\n");
 	//free(cmd);

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:55:44 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 14:42:03 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/01 15:26:48 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	split_line(char **res, char **input)
 	return (EXIT_SUCCESS);
 }
 
-int	parse_line(t_cmd **cmd, char *line)
+int	parse_line(t_cmd **cmd_lst, char *line, char **envp)
 {
-	t_cmd	*new;
+	t_cmd	*cmd;
 	char	*res;
 
 	if (*line == '|')
@@ -63,14 +63,14 @@ int	parse_line(t_cmd **cmd, char *line)
 			return (EXIT_FAILURE);
 		if (!*res)
 			return (error_handler("syntax error near unexpected token \'|\'"));
-		new = cmd_new();
-		if (!new)
+		cmd = cmd_new();
+		if (!cmd)
 			return (error_handler("malloc error in cmd_new()"));
-		if (parse_command(&new, res))
+		if (parse_command(&cmd, res))
 			return (EXIT_FAILURE);
-//		if (replace_env(*cmd))
-//			return (EXIT_FAILURE);
-		cmd_add_back(cmd, new);
+		if (replace(cmd, envp))
+			return (EXIT_FAILURE);
+		cmd_add_back(cmd_lst, cmd);
 		free(res);
 	}
 	return (EXIT_SUCCESS);

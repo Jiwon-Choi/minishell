@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/10/28 13:57:15 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/11/01 14:25:41 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			= error.c \
 			  main.c \
 			  parse_command.c \
 			  parse_line.c \
+			  replace.c \
 			  utils_cmd.c \
 			  utils_redir.c
 
