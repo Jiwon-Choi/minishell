@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:40:11 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/01 18:39:00 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/02 23:03:59 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,20 @@ int	get_env(char **res, char *str, char **envp, int *idx)
 	key_size = 0;
 	while (str[key_size] && str[key_size] != '\"' && str[key_size] != '\'' && str[key_size] != ' ')
 		key_size++;
+	printf("key_size : %d\n", key_size);
 	key = ft_substr(str, 0, key_size);
 	val = NULL;
 	while (*envp)
 	{
-		if (ft_strncmp(*envp, key + 1, ft_strlen(key + 1)) == 0)
+		if (key_size == 1)
+			val = ft_strdup("$");
+		else if (ft_strncmp(*envp, key + 1, ft_strlen(key + 1)) == 0)
 			val = getenv(*envp);
 		envp++;
 	}
-//	printf("key : [%s]\n", key + 1);
-//	printf("input res : [%s]\n", *res);
-//	printf("val : [%s]\n", val);
+	printf("key : [%s]\n", key);
+	printf("input res : [%s]\n", *res);
+	printf("val : [%s]\n", val);
 	*res = sh_strjoin(*res, val);
 	*idx += key_size;
 //	free(key);
@@ -97,12 +100,12 @@ int	replace_env(char **input, char **envp)
 			quote = DOUBLE;
 		else if ((*input)[i] == '\'' && quote == NONE)
 			quote = SINGLE;
+		else if ((*input)[i] == QUOTE[quote])
+			quote = NONE;
 		else if ((*input)[i] == '$' && quote != SINGLE)
 			get_env(&res, &((*input)[i]), envp, &i);
 		else if ((*input)[i] != QUOTE[quote])
 			add_char(&res, (*input)[i]);
-		else if ((*input)[i] == QUOTE[quote])
-			quote = NONE;
 		i++;
 	}
 	free(*input);
@@ -112,16 +115,24 @@ int	replace_env(char **input, char **envp)
 
 int	replace(t_cmd *cmd, char **envp)
 {
-	char	**p;
+	char		**p;
+	t_redirect	*pr;
 
 	p = cmd->argv;
-	(void)envp;
 	while (*p)
 	{
 		printf(">>> [%s]\n", *p);
 		replace_env(p, envp);
 		printf(">>> [%s]\n\n", *p);
 		p++;
+	}
+	pr = cmd->redirect;
+	while (pr)
+	{
+		printf(">>> [%s]\n", pr->file);
+		replace_env(&(pr->file), envp);
+		printf(">>> [%s]\n\n", pr->file);
+		pr = pr->next;;
 	}
 	return (EXIT_SUCCESS);
 }
