@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:55:44 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/01 15:26:48 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 15:51:56 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	parse_line(t_cmd **cmd_lst, char *line, char **envp)
 			return (EXIT_FAILURE);
 		if (replace(cmd, envp))
 			return (EXIT_FAILURE);
+		if (error_check(cmd))
+			return (error_handler("syntax error near unexpected token"));
 		cmd_add_back(cmd_lst, cmd);
 		free(res);
 	}

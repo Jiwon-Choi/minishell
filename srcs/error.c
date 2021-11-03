@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 13:47:19 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/20 15:26:14 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 15:51:44 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,18 @@ int	error_handler(char *err_msg)
 {
 	printf("[Error] %s\n", err_msg);
 	return (EXIT_FAILURE);
+}
+
+int	error_check(t_cmd *cmd)
+{
+	t_redirect	*rp;
+
+	rp = cmd->redirect;
+	while (rp)
+	{
+		if (rp->file[0] == '<' || rp->file[0] == '>' || rp->file[0] == '\0')
+			return (TRUE);
+		rp = rp->next;
+	}
+	return (FALSE);
 }

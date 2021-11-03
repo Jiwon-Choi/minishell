@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:40:11 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/02 23:03:59 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 15:57:24 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,28 @@ int	get_env(char **res, char *str, char **envp, int *idx)
 	char	*key;
 	char	*val;
 
+	str++;
+	if (*str == '?' && (*idx)++)
+	{
+		val = "($?)";
+		*res = sh_strjoin(*res, val);
+		// free(val);
+		return (EXIT_SUCCESS);
+	}
 	key_size = 0;
-	while (str[key_size] && str[key_size] != '\"' && str[key_size] != '\'' && str[key_size] != ' ')
+	while (str[key_size] && str[key_size] != '\"' && str[key_size] != '\''
+		&& str[key_size] != ' ' && str[key_size] != '$')
 		key_size++;
-	printf("key_size : %d\n", key_size);
 	key = ft_substr(str, 0, key_size);
 	val = NULL;
 	while (*envp)
 	{
-		if (key_size == 1)
+		if (key_size == 0)
 			val = ft_strdup("$");
-		else if (ft_strncmp(*envp, key + 1, ft_strlen(key + 1)) == 0)
+		else if (ft_strncmp(*envp, key, ft_strlen(key)) == 0)
 			val = getenv(*envp);
 		envp++;
 	}
-	printf("key : [%s]\n", key);
-	printf("input res : [%s]\n", *res);
-	printf("val : [%s]\n", val);
 	*res = sh_strjoin(*res, val);
 	*idx += key_size;
 //	free(key);
@@ -116,23 +121,19 @@ int	replace_env(char **input, char **envp)
 int	replace(t_cmd *cmd, char **envp)
 {
 	char		**p;
-	t_redirect	*pr;
+	t_redirect	*rp;
 
 	p = cmd->argv;
 	while (*p)
 	{
-		printf(">>> [%s]\n", *p);
 		replace_env(p, envp);
-		printf(">>> [%s]\n\n", *p);
 		p++;
 	}
-	pr = cmd->redirect;
-	while (pr)
+	rp = cmd->redirect;
+	while (rp)
 	{
-		printf(">>> [%s]\n", pr->file);
-		replace_env(&(pr->file), envp);
-		printf(">>> [%s]\n\n", pr->file);
-		pr = pr->next;;
+		replace_env(&(rp->file), envp);
+		rp = rp->next;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/01 15:20:57 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 15:49:53 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_cmd
 
 // error.c
 int			error_handler(char *err_msg);
+int			error_check(t_cmd *cmd);
 
 // parse_command.c
 int			split_redirect(char **input);
