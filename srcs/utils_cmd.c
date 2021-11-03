@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:12:22 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 12:09:29 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 16:13:10 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*cmd_new(void)
+t_cmd	*create_cmd(void)
 {
 	t_cmd	*new;
 

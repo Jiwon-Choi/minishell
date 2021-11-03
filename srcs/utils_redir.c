@@ -6,13 +6,13 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:10:00 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/10/28 14:24:25 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 16:56:01 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redirect	*redir_new(char *line)
+t_redirect	*create_redir(char *line)
 {
 	t_redirect	*new;
 
@@ -41,7 +41,7 @@ t_redirect	*redir_new(char *line)
 	}
 	while (ft_isspace(*line))
 		line++;
-	new->file = ft_substr(line, 0, ft_strlen(line));
+	new->file = ft_strdup(line);
 	new->next = NULL;
 	return (new);
 }

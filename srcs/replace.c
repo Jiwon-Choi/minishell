@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:40:11 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 15:57:24 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:09:07 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ int	get_env(char **res, char *str, char **envp, int *idx)
 	int		key_size;
 	char	*key;
 	char	*val;
+	char	*join;
 
-	str++;
 	if (*str == '?' && (*idx)++)
 	{
 		val = "($?)";
-		*res = sh_strjoin(*res, val);
+		join = sh_strjoin(*res, val);
+		free(*res);
+		*res = join;
 		// free(val);
 		return (EXIT_SUCCESS);
 	}
@@ -78,43 +80,44 @@ int	get_env(char **res, char *str, char **envp, int *idx)
 	while (*envp)
 	{
 		if (key_size == 0)
-			val = ft_strdup("$");
+			val = "$";
 		else if (ft_strncmp(*envp, key, ft_strlen(key)) == 0)
 			val = getenv(*envp);
 		envp++;
 	}
-	*res = sh_strjoin(*res, val);
+	join = sh_strjoin(*res, val);
+	free(*res);
+	*res = join;
 	*idx += key_size;
-//	free(key);
-//	free(val);
+	free(key);
 	return (EXIT_SUCCESS);
 }
 
-int	replace_env(char **input, char **envp)
+int	replace_env(char **str, char **envp)
 {
 	int		i;
 	int		quote;
-	char	*res;
+	char	*new_str;
 
 	i = 0;
 	quote = NONE;
-	res = NULL;
-	while ((*input)[i])
+	new_str = NULL;
+	while ((*str)[i])
 	{
-		if ((*input)[i] == '\"' && quote == NONE)
+		if ((*str)[i] == '\"' && quote == NONE)
 			quote = DOUBLE;
-		else if ((*input)[i] == '\'' && quote == NONE)
+		else if ((*str)[i] == '\'' && quote == NONE)
 			quote = SINGLE;
-		else if ((*input)[i] == QUOTE[quote])
+		else if ((*str)[i] == QUOTE[quote])
 			quote = NONE;
-		else if ((*input)[i] == '$' && quote != SINGLE)
-			get_env(&res, &((*input)[i]), envp, &i);
-		else if ((*input)[i] != QUOTE[quote])
-			add_char(&res, (*input)[i]);
+		else if ((*str)[i] == '$' && quote != SINGLE)
+			get_env(&new_str, &((*str)[i + 1]), envp, &i);
+		else if ((*str)[i] != QUOTE[quote])
+			add_char(&new_str, (*str)[i]);
 		i++;
 	}
-	free(*input);
-	*input = res;
+	free(*str);
+	*str = new_str;
 	return (EXIT_SUCCESS);
 }
 

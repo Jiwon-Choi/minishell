@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:55:44 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 15:51:56 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:04:24 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,50 +30,50 @@ int	pass_quotes(char **input)
 	return (EXIT_SUCCESS);
 }
 
-int	split_line(char **res, char **input)
+int	split_line(char **cmd, char **line)
 {
 	char	*start;
 
-	if (**input == '|')
-		(*input)++;
-	while (ft_isspace(**input))
-		(*input)++;
-	start = *input;
-	while (**input && **input != '|')
+	if (**line == '|')
+		(*line)++;
+	while (ft_isspace(**line))
+		(*line)++;
+	start = *line;
+	while (**line && **line != '|')
 	{
-		if (**input == '\'' || **input == '\"')
-			if (pass_quotes(input))
+		if (**line == '\'' || **line == '\"')
+			if (pass_quotes(line))
 				return (EXIT_FAILURE);
-		(*input)++;
+		(*line)++;
 	}
-	*res = ft_substr(start, 0, *input - start);
+	*cmd = ft_substr(start, 0, *line - start);
 	return (EXIT_SUCCESS);
 }
 
 int	parse_line(t_cmd **cmd_lst, char *line, char **envp)
 {
-	t_cmd	*cmd;
-	char	*res;
+	t_cmd	*new_cmd;
+	char	*cmd;
 
 	if (*line == '|')
 		return (error_handler("syntax error near unexpected token \'|\'"));
 	while (*line)
 	{
-		if (split_line(&res, &line))
+		if (split_line(&cmd, &line))
 			return (EXIT_FAILURE);
-		if (!*res)
+		if (!*cmd)
 			return (error_handler("syntax error near unexpected token \'|\'"));
-		cmd = cmd_new();
-		if (!cmd)
-			return (error_handler("malloc error in cmd_new()"));
-		if (parse_command(&cmd, res))
+		new_cmd = create_cmd();
+		if (!new_cmd)
+			return (error_handler("malloc error in create_cmd()"));
+		cmd_add_back(cmd_lst, new_cmd);
+		if (parse_command(&new_cmd, cmd))
 			return (EXIT_FAILURE);
-		if (replace(cmd, envp))
+		if (replace(new_cmd, envp))
 			return (EXIT_FAILURE);
-		if (error_check(cmd))
+		if (error_check(new_cmd))
 			return (error_handler("syntax error near unexpected token"));
-		cmd_add_back(cmd_lst, cmd);
-		free(res);
+		free(cmd);
 	}
 	return (EXIT_SUCCESS);
 }

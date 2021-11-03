@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:15 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/01 12:05:13 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 17:59:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,49 @@ int	split_redirect(char **input)
 	return (EXIT_SUCCESS);
 }
 
-int	split_command(char **res, char **input)
+int	split_command(char **res, char **cmd_str)
 {
 	char	*start;
 
-	while (ft_isspace(**input))
-		(*input)++;
-	start = *input;
-	if (**input == '<' || **input == '>')
+	while (ft_isspace(**cmd_str))
+		(*cmd_str)++;
+	start = *cmd_str;
+	if (**cmd_str == '<' || **cmd_str == '>')
 	{
-		if (split_redirect(input))
+		if (split_redirect(cmd_str))
 			return (EXIT_FAILURE);
-		(*input)++;
+		(*cmd_str)++;
 	}
-	while (**input && **input != ' ')
+	while (**cmd_str && **cmd_str != ' ')
 	{
-		if (**input == '<' || **input == '>')
+		if (**cmd_str == '<' || **cmd_str == '>')
 			break ;
-		else if (**input == '\'' || **input == '\"')
-			if (pass_quotes(input))
+		else if (**cmd_str == '\'' || **cmd_str == '\"')
+			if (pass_quotes(cmd_str))
 				return (EXIT_FAILURE);
-		(*input)++;
+		(*cmd_str)++;
 	}
-	*res = ft_substr(start, 0, *input - start);
+	*res = ft_substr(start, 0, *cmd_str - start);
 	return (EXIT_SUCCESS);
 }
 
-int	parse_command(t_cmd **new, char *line)
+int	parse_command(t_cmd **cmd, char *cmd_str)
 {
 	char	*res;
 
-	while (*line)
+	while (*cmd_str)
 	{
-		if (split_command(&res, &line))
+		if (split_command(&res, &cmd_str))
 			return (EXIT_FAILURE);
 		if (*res == '<' || *res == '>')
 		{
-			redir_add_back(&((*new)->redirect), redir_new(res));
+			redir_add_back(&((*cmd)->redirect), create_redir(res));
 			free(res);
 		}
 		else if (*res)
-			(*new)->argv = cmd_argv_add_back((*new)->argv, res);
+			(*cmd)->argv = cmd_argv_add_back((*cmd)->argv, res);
+		else
+			free(res);
 	}
 	return (EXIT_SUCCESS);
 }
