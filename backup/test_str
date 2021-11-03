@@ -1,3 +1,0 @@
-char	*str = "cat -e<< file1 <file2 >               file3    >> file4\'abcd\' | echo <file	-n \"\'abcd   $USER      \" > file2";
-
-char	*str = "echo <file1 123\"abc\" >> file2 | cat -e | ";
