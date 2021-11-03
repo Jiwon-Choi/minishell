@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 14:40:11 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:09:07 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:24:48 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	get_env(char **res, char *str, char **envp, int *idx)
 		join = sh_strjoin(*res, val);
 		free(*res);
 		*res = join;
-		// free(val);
 		return (EXIT_SUCCESS);
 	}
 	key_size = 0;

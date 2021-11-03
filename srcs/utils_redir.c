@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:10:00 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 16:56:01 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:37:32 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,19 @@ void	redir_add_back(t_redirect **lst, t_redirect *new)
 	while (p->next)
 		p = p->next;
 	p->next = new;
+}
+
+void	redir_clear(t_redirect **lst)
+{
+	t_redirect	*p;
+	t_redirect	*tmp;
+
+	p = *lst;
+	while (p)
+	{
+		tmp = p->next;
+		free(p);
+		p = tmp;
+	}
+	*lst = NULL;
 }

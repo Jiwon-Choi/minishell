@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:12:22 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 16:13:10 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:37:37 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,20 @@ char	**cmd_argv_add_back(char **old_cmd, char *input)
 	new[i] = NULL;
 	free(old_cmd);
 	return (new);
+}
+
+void	cmd_clear(t_cmd **lst)
+{
+	t_cmd	*p;
+	t_cmd	*tmp;
+
+	p = *lst;
+	while (p)
+	{
+		tmp = p->next;
+		redir_clear(&(p->redirect));
+		free(p);
+		p = tmp;
+	}
+	*lst = NULL;
 }

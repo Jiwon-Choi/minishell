@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 13:47:19 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:04:57 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:19:48 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	error_check(t_cmd *cmd)
 	while (rp)
 	{
 		if (rp->file == NULL || rp->file[0] == '\0'
-				|| rp->file[0] == '<' || rp->file[0] == '>')
+			|| rp->file[0] == '<' || rp->file[0] == '>')
 			return (TRUE);
 		rp = rp->next;
 	}

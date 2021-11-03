@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 16:47:09 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:37:53 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ int			replace(t_cmd *cmd, char **envp);
 t_cmd		*create_cmd(void);
 void		cmd_add_back(t_cmd **lst, t_cmd *new);
 char		**cmd_argv_add_back(char **old_cmd, char *input);
+void		cmd_clear(t_cmd **lst);
 
 // utils_redir.c
 t_redirect	*create_redir(char *line);
 void		redir_add_back(t_redirect **lst, t_redirect *new);
+void		redir_clear(t_redirect **lst);
 
 #endif
