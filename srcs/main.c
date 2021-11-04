@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:38:56 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/04 11:51:42 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	test_print(t_cmd *cmd, char *line)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line = "  ec\"ho\">>out -n< $USER \'$dfsdf \'$$123 | grep -r | grep -r";
+	char	*line = "  ec\"ho\">>out -n< $USER \'$dfsdf \'$$123  | grep -r";
 //	char	*line = "cat <<$USER";
 
 	t_cmd	*cmd;
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	cmd = NULL;
 	if (parse_line(&cmd, line, envp))
 		return (EXIT_FAILURE);
-	test_print(cmd, line);
+//	test_print(cmd, line);
 	cmd_clear(&cmd);
 	return (EXIT_SUCCESS);
 }

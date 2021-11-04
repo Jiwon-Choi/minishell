@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:10:00 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:49:19 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/04 11:35:09 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	redir_clear(t_redirect **lst)
 	while (p)
 	{
 		tmp = p->next;
+		free(p->file);
 		free(p);
 		p = tmp;
 	}

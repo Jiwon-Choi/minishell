@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:12:22 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:37:37 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/04 11:47:33 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,16 @@ void	cmd_clear(t_cmd **lst)
 {
 	t_cmd	*p;
 	t_cmd	*tmp;
+	char	**argv_p;
 
 	p = *lst;
 	while (p)
 	{
 		tmp = p->next;
+		argv_p = p->argv;
+		while (*p->argv)
+			free(*p->argv++);
+		free(argv_p);
 		redir_clear(&(p->redirect));
 		free(p);
 		p = tmp;
