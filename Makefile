@@ -6,7 +6,7 @@
 #    By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 15:47:51 by jiwchoi           #+#    #+#              #
-#    Updated: 2021/11/03 17:15:19 by jiwchoi          ###   ########.fr        #
+#    Updated: 2021/11/13 17:32:39 by jiwchoi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_DIR	= ./srcs/
 OBJS_DIR	= ./objs/
 
 SRC			= error.c \
+			  execute.c \
 			  main.c \
 			  parse_command.c \
 			  parse_line.c \

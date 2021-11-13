@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:37:53 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/13 17:32:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_cmd
 int			error_handler(char *err_msg);
 t_bool		error_check(t_cmd *cmd);
 
+// execute.c
+int			execute(t_cmd *cmd, char **envp);
 // parse_command.c
 int			split_redirect(char **input);
 int			split_command(char **res, char **cmd_str);

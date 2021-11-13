@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:10:00 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/04 11:35:09 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/13 13:39:34 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_redirect	*create_redir(char *line)
 	else if (*line == '<')
 		new->type = REDIRECT_INPUT_SINGLE;
 	else if (*line == '>')
-		new->type = REDIRECT_OUTPUT_DOUBLE;
+		new->type = REDIRECT_OUTPUT_SINGLE;
 	if (new->type % 2 == 0)
 		line += 2;
 	else

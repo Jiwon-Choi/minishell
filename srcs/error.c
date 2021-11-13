@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 13:47:19 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/03 18:19:48 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/13 19:42:56 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_handler(char *err_msg)
 {
-	printf("[Error] %s\n", err_msg);
+	printf("minishell: %s\n", err_msg);
 	return (EXIT_FAILURE);
 }
 
