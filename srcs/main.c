@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/13 20:52:51 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/14 19:00:04 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_line(&cmd, line, envp))
 			return (EXIT_FAILURE);
 //		test_print(cmd, line);
-		if (execute(cmd, envp))
+		if (execute(cmd, envp, STDIN_FILENO))
 			return (EXIT_FAILURE);
 		free(line);
 		cmd_clear(&cmd);

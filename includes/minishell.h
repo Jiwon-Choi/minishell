@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:32:13 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/13 17:32:14 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/14 20:00:14 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define READ 0
+# define WRITE 1
 
 # define NONE 0
 # define SINGLE 1
@@ -61,7 +64,7 @@ int			error_handler(char *err_msg);
 t_bool		error_check(t_cmd *cmd);
 
 // execute.c
-int			execute(t_cmd *cmd, char **envp);
+int			execute(t_cmd *cmd, char **envp, int fd_in);
 // parse_command.c
 int			split_redirect(char **input);
 int			split_command(char **res, char **cmd_str);
