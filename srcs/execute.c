@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 16:51:15 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/14 20:00:20 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/17 16:51:49 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,11 @@ void	ft_close(int fd)
 	close(fd);
 }
 
-int	wait_cmd(void)
-{
-	int	status;
-
-	wait(&status);
-	return (EXIT_SUCCESS);
-}
-
 int	execute(t_cmd *cmd, char **envp, int fd_in)
 {
 	int		pipefd[2];
 	int		fd_out;
+	int		status;
 	pid_t	pid;
 
 	if (!cmd)
@@ -76,17 +69,17 @@ int	execute(t_cmd *cmd, char **envp, int fd_in)
 	{
 		ft_close(fd_in);
 		ft_close(fd_out);
-		wait_cmd();
-//		waitpid(pid, &status, 0);
+		wait(&status);
 	}
 	else if (pid == 0)
 	{
-		ft_close(pipefd[READ]);
+		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_out, STDOUT_FILENO);
 		char **path = make_path(envp, cmd->argv[0]);
 		while (*path)
 			execve(*path++, cmd->argv, envp);
+		error_handler("command not found");
 		exit(0);
-		//error_handler("command not found");
 	}
 	/*
 	i = 0;
