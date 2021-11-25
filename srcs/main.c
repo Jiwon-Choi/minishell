@@ -6,7 +6,7 @@
 /*   By: jiwchoi <jiwchoi@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:00:58 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/11/14 19:00:04 by jiwchoi          ###   ########.fr       */
+/*   Updated: 2021/11/25 14:36:41 by jiwchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	t_cmd	*cmd;
+	t_env	*env;
 
 	(void)argc;
 	(void)argv;
 	cmd = NULL;
+	env = NULL;
 	int i = 0;
 	while (i++ < 5)
 	{
@@ -53,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		add_history(line);
-		if (parse_line(&cmd, line, envp))
+		if (parse_line(&cmd, line, env))
 			return (EXIT_FAILURE);
 //		test_print(cmd, line);
 		if (execute(cmd, envp, STDIN_FILENO))
